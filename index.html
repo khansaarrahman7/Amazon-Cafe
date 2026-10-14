@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AMAZON CAFE – Sherpur</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#120b07;--bg2:#1c120c;--card:#241810;--cream:#f5ead7;--mut:#b9a58b;--gold:#d4a24c;--gold2:#f0c878;--brown:#5a3520;
+--serif:'Cormorant Garamond',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#120b07}}
+:root[data-theme="dark"]{--bg:#120b07}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);font-weight:300;line-height:1.65;overflow-x:hidden}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.1}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,header,footer{position:relative;z-index:1}
+section{padding:96px 6vw;max-width:1280px;margin:auto}
+h2{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:12px}
+.sub{color:var(--mut);max-width:560px;margin-bottom:36px}
+.btn{display:inline-block;padding:14px 30px;border-radius:50px;font-weight:600;border:1px solid var(--gold);cursor:pointer;font-family:inherit;font-size:1rem;transition:.35s;background:none;color:var(--cream)}
+.btn.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2a1608;border:0}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(212,162,76,.3)}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 6vw 14px;transition:.4s}
+nav.s{background:rgba(18,11,7,.88);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(212,162,76,.2)}
+.logo{font-family:var(--serif);font-size:1.6rem;font-weight:700;letter-spacing:.12em;color:var(--gold2)}
+.links{display:flex;gap:28px;align-items:center}
+.links a{font-size:.95rem;position:relative}
+.links a:not(.pill):after{content:'';position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--gold);transition:.3s}
+.links a:hover:after{width:100%}
+.pill{background:var(--gold);color:#2a1608;padding:8px 20px;border-radius:40px;font-weight:600}
+#burger{display:none;background:none;border:0;color:var(--cream);font-size:1.8rem;cursor:pointer}
+@media(max-width:860px){#burger{display:block}.links{position:fixed;inset:0 0 0 30%;background:var(--bg2);flex-direction:column;justify-content:center;gap:30px;transform:translateX(100%);transition:.4s}.links.o{transform:none}.links a{font-size:1.2rem}}
+/* hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;padding-top:120px}
+.hero h1{font-size:clamp(3.4rem,10vw,7.5rem);letter-spacing:.04em;background:linear-gradient(180deg,var(--gold2),var(--gold) 60%,#8a5a22);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font-family:var(--serif);font-style:italic;font-size:clamp(1.4rem,3vw,2.2rem);margin:14px 0}
+.hero p{color:var(--mut);max-width:480px;margin-bottom:30px}
+.hero .btns{display:flex;gap:14px;flex-wrap:wrap}
+.cupwrap{position:relative;display:grid;place-items:center;transform:translateY(var(--py,0))}
+.cupwrap:before{content:'';position:absolute;width:75%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(240,200,120,.35),transparent 65%);animation:pulse 5s ease-in-out infinite}
+.cupwrap svg{width:min(480px,90%);position:relative;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6));animation:float 6s ease-in-out infinite}
+.steam path{fill:none;stroke:rgba(245,234,215,.55);stroke-width:7;stroke-linecap:round;animation:steam 4s ease-in-out infinite;opacity:0}
+.steam path:nth-child(2){animation-delay:1.3s}.steam path:nth-child(3){animation-delay:2.6s}
+.wave{animation:wave 7s ease-in-out infinite alternate}
+@keyframes steam{0%{opacity:0;transform:translateY(20px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-40px)}}
+@keyframes float{50%{transform:translateY(-14px) rotate(1deg)}}
+@keyframes pulse{50%{opacity:.5;transform:scale(1.1)}}
+@keyframes wave{to{transform:translateX(-30px)}}
+@media(max-width:860px){.hero{grid-template-columns:1fr;text-align:center}.hero p{margin-inline:auto}.hero .btns{justify-content:center}.cupwrap{order:-1;max-width:300px;margin:auto}}
+/* menu */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+.filters button{padding:9px 20px;border-radius:40px;border:1px solid rgba(212,162,76,.4);background:none;color:var(--cream);font-family:inherit;cursor:pointer;transition:.3s}
+.filters button.a,.filters button:hover{background:var(--gold);color:#2a1608}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
+.card{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid rgba(212,162,76,.12);transition:.4s}
+.card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.thumb{height:170px;display:grid;place-items:center;font-size:4.4rem;overflow:hidden}
+.thumb span{transition:transform .6s;display:block}.card:hover .thumb span{transform:scale(1.3) rotate(-6deg)}
+.cb{padding:18px}.cb h3{font-size:1.45rem}.cb p{color:var(--mut);font-size:.9rem;margin:6px 0 14px}
+.row{display:flex;justify-content:space-between;align-items:center}
+.price{color:var(--gold2);font-weight:600;font-size:1.15rem}
+.small{padding:8px 16px;font-size:.85rem}
+.note{font-size:.85rem;color:var(--mut);border-left:2px solid var(--gold);padding-left:12px;margin-top:26px}
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.int{aspect-ratio:4/5;border-radius:220px 220px 20px 20px;background:radial-gradient(circle at 50% 18%,rgba(240,200,120,.5),transparent 28%),linear-gradient(180deg,#3a2314,#1a0f08);border:1px solid rgba(212,162,76,.3);position:relative;overflow:hidden}
+.int i{position:absolute;bottom:0;left:10%;right:10%;height:30%;background:linear-gradient(#4a2c18,#2a180d);border-radius:14px 14px 0 0}
+.int b{position:absolute;font-size:3rem;font-weight:400}
+.about p{color:var(--mut);margin-bottom:16px}
+.about h2{margin-bottom:20px}
+@media(max-width:860px){.about{grid-template-columns:1fr}.int{max-width:380px;margin:auto}}
+/* offers */
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.offer{padding:32px;border-radius:22px;background:linear-gradient(145deg,var(--card),#33200f);border:1px solid rgba(212,162,76,.3);position:relative;overflow:hidden}
+.offer:before{content:'';position:absolute;top:-60%;left:-40%;width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(240,200,120,.12),transparent);transform:rotate(20deg);animation:shine 5s infinite}
+@keyframes shine{to{left:130%}}
+.offer .e{font-size:2.6rem}.offer h3{font-size:1.7rem;margin:8px 0}.offer p{color:var(--mut)}
+.meta{margin-top:14px;font-size:.85rem;color:var(--gold2)}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));grid-auto-rows:190px;gap:14px}
+.gal button{border:0;border-radius:16px;font-size:4rem;cursor:zoom-in;display:grid;place-items:center;position:relative;overflow:hidden;transition:.5s}
+.gal button:nth-child(3n+1){grid-row:span 2}
+.gal button span{transition:transform .6s}.gal button:hover span{transform:scale(1.35)}
+.gal button:after{content:attr(data-t);position:absolute;inset:auto 0 0;padding:30px 14px 12px;font:400 .9rem var(--sans);color:var(--cream);background:linear-gradient(transparent,rgba(0,0,0,.8));opacity:0;transition:.4s}
+.gal button:hover:after{opacity:1}
+#lb{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:none;place-items:center;text-align:center;cursor:zoom-out}
+#lb.o{display:grid}#lb div{font-size:min(40vw,14rem)}#lb p{color:var(--cream);font-family:var(--serif);font-size:1.6rem}
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px}
+.rev{background:var(--card);padding:28px;border-radius:20px;border:1px solid rgba(212,162,76,.12)}
+.stars{color:var(--gold2);letter-spacing:3px}.rev p{margin:12px 0 18px;font-style:italic;font-family:var(--serif);font-size:1.2rem}
+.who{display:flex;gap:12px;align-items:center;font-size:.9rem}
+.av{width:42px;height:42px;border-radius:50%;background:var(--brown);display:grid;place-items:center;font-weight:600;color:var(--gold2)}
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact form{display:grid;gap:14px}
+input,textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(212,162,76,.3);background:var(--card);color:var(--cream);font:inherit}
+.info p{margin-bottom:10px;color:var(--mut)}.info strong{color:var(--cream);display:block;font-weight:600}
+@media(max-width:860px){.contact{grid-template-columns:1fr}}
+footer{text-align:center;padding:40px 6vw calc(40px + env(safe-area-inset-bottom,0px));color:var(--mut);border-top:1px solid rgba(212,162,76,.15);background:rgba(18,11,7,.8)}
+.rv{opacity:0;transform:translateY(30px);transition:1s}.rv.v{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style></head><body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<nav id="nav"><a href="#home" class="logo">AMAZON CAFE</a>
+<button id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
+<div class="links" id="links"><a href="#home">Home</a><a href="#about">About Us</a><a href="#menu">Our Menu</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a><a href="#menu" class="pill">Order Now</a></div></nav>
+<main>
+<section class="hero" id="home">
+<div><h1>AMAZON CAFE</h1><div class="tag">Taste the Moment. Feel the Magic.</div>
+<p>Discover your perfect coffee, delicious bites and a relaxing cafe experience in Sherpur.</p>
+<div class="btns"><a class="btn gold" href="#menu">Explore Our Menu</a><a class="btn" href="#contact">Contact Us</a></div></div>
+<div class="cupwrap" id="cup"><svg viewBox="0 0 400 400" role="img" aria-label="Animated cup of coffee">
+<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5ead7"/><stop offset="1" stop-color="#b9965f"/></linearGradient>
+<linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4a2a"/><stop offset="1" stop-color="#2a150a"/></linearGradient>
+<clipPath id="cl"><ellipse cx="190" cy="205" rx="118" ry="30"/></clipPath></defs>
+<g class="steam" transform="translate(0,0)"><path d="M150 170c-20-30 20-50 0-85"/><path d="M195 165c-20-35 20-55 0-100"/><path d="M240 170c-20-30 20-50 0-85"/></g>
+<ellipse cx="200" cy="350" rx="170" ry="26" fill="url(#g1)"/><ellipse cx="200" cy="342" rx="130" ry="16" fill="#e2cfa8"/>
+<path d="M70 200h240c0 90-45 145-120 145S70 290 70 200z" fill="url(#g1)"/>
+<path d="M300 225c60-10 62 60 0 70" fill="none" stroke="url(#g1)" stroke-width="16" stroke-linecap="round"/>
+<ellipse cx="190" cy="205" rx="120" ry="32" fill="#d9c59d"/><ellipse cx="190" cy="205" rx="112" ry="27" fill="url(#g2)"/>
+<g clip-path="url(#cl)"><path class="wave" d="M60 205q30-14 60 0t60 0 60 0 60 0 60 0v30H60z" fill="rgba(212,162,76,.45)"/></g>
+<path d="M190 196c-14 4-20 14-10 22 8 4 10-6 10-6s2 10 10 6c10-8 4-18-10-22z" fill="#f0c878" opacity=".85"/>
+<text x="190" y="290" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="30" fill="#5a3520" font-weight="700" letter-spacing="3">AMAZON</text></svg></div>
+</section>
+
+<section id="menu"><div class="rv"><h2>Our Menu</h2><p class="sub">Browse by category, then tap Order Now to send us your order by email.</p>
+<div class="filters" id="filters"></div><div class="grid" id="grid"></div>
+<p class="note">Sample menu: items and prices (৳) below are placeholders and can be edited. They do not confirm what is currently available at AMAZON CAFE.</p></div></section>
+
+<section id="about"><div class="about rv"><div class="int" aria-hidden="true"><b style="top:12%;left:14%">💡</b><b style="top:8%;right:16%">💡</b><b style="top:40%;left:40%">☕</b><i></i><b style="bottom:8%;left:18%">🪑</b><b style="bottom:8%;right:18%">🪴</b></div>
+<div><h2>Welcome to AMAZON CAFE</h2><p>Step in from the street in Sherpur Sadar and slow down. AMAZON CAFE is a place for a good cup of coffee, something tasty to go with it, and a seat where you can talk, work or simply rest.</p><p>We care about the small things: a well-pulled shot, a warm welcome and a calm, comfortable corner for friends, family and quiet moments.</p><a class="btn gold" href="#contact">Plan your visit</a></div></div></section>
+
+<section id="offers"><div class="rv"><h2>Special Offers</h2><p class="sub">Sample offer cards. Replace the text, prices and dates in the OFFERS list in the page source before going live.</p><div class="offers" id="offers"></div></div></section>
+
+<section id="gallery"><div class="rv"><h2>Gallery</h2><p class="sub">Tap any tile to view it larger. Sample illustrations: swap in your own cafe photos when ready.</p><div class="gal" id="gal"></div></div></section>
+
+<section id="reviews"><div class="rv"><h2>Customer Reviews</h2><p class="sub">Sample reviews for layout only. They are not from real customers and should be replaced with genuine reviews.</p><div class="revs" id="revs"></div></div></section>
+
+<section id="contact"><div class="contact rv"><div class="info"><h2>Contact</h2><p><strong>Address</strong>Sherpur Sadar, Sherpur, Bangladesh</p><p><strong>Email</strong><a href="mailto:khansaarrahman7@gmail.com">khansaarrahman7@gmail.com</a></p><p>Opening hours: add yours here.</p></div>
+<form id="f"><input id="n" placeholder="Your name" required aria-label="Your name"><input id="e" type="email" placeholder="Your email" required aria-label="Your email"><textarea id="m" rows="5" placeholder="Your message" required aria-label="Your message"></textarea><button class="btn gold" type="submit">Send message</button></form></div></section>
+</main>
+<footer><div class="logo">AMAZON CAFE</div><p>Sherpur Sadar, Sherpur, Bangladesh · khansaarrahman7@gmail.com</p><p>© 2026 AMAZON CAFE. All rights reserved.</p></footer>
+<div id="lb" role="dialog" aria-label="Image viewer"><div><div id="lbe"></div><p id="lbt"></p></div></div>
+<script>
+// ===== EDITABLE CONTENT =====
+var EMAIL="khansaarrahman7@gmail.com";
+var MENU=[
+["Hot Coffee","Classic Espresso","Rich, bold single shot.",120,"☕"],["Hot Coffee","Americano","Espresso with hot water.",150,"☕"],["Hot Coffee","Mocha","Espresso, chocolate, steamed milk.",220,"🍫"],
+["Cold Coffee","Iced Coffee","Chilled coffee over ice.",200,"🧊"],["Cold Coffee","Cold Brew","Slow-steeped, smooth.",250,"🥤"],["Cold Coffee","Frappe","Blended, creamy, cold.",280,"🍹"],
+["Cappuccino & Latte","Cappuccino","Espresso, milk, foam.",200,"☕"],["Cappuccino & Latte","Caffe Latte","Silky milk, light espresso.",220,"🥛"],["Cappuccino & Latte","Caramel Latte","Latte with caramel.",260,"🍯"],
+["Tea & Refreshments","Milk Tea","Strong, creamy tea.",60,"🍵"],["Tea & Refreshments","Lemon Tea","Fresh and light.",70,"🍋"],["Tea & Refreshments","Mint Cooler","Cool mint refresher.",120,"🌿"],
+["Burgers & Sandwiches","Chicken Burger","Crispy chicken, sauce, lettuce.",250,"🍔"],["Burgers & Sandwiches","Club Sandwich","Layered and toasted.",220,"🥪"],["Burgers & Sandwiches","Beef Burger","Juicy patty, cheese.",300,"🍔"],
+["Cakes & Desserts","Chocolate Cake","Rich chocolate slice.",180,"🍰"],["Cakes & Desserts","Cheesecake","Creamy, with berry topping.",220,"🧁"],["Cakes & Desserts","Brownie","Fudgy and warm.",120,"🍫"],
+["Snacks & Fast Food","French Fries","Golden and salted.",120,"🍟"],["Snacks & Fast Food","Chicken Nuggets","Crunchy bites.",180,"🍗"],["Snacks & Fast Food","Pasta","Creamy sauce, herbs.",260,"🍝"]];
+var OFFERS=[["☕","Coffee of the Day","Sample: a featured coffee at a special price. Edit the item and price.","Price: ৳ — | Valid: set date"],["🍰","Coffee & Dessert Combo","Sample: pair a coffee with a dessert. Edit what's included.","Price: ৳ — | Valid: set date"],["✨","Special Cafe Deals","Sample: seasonal or weekend deals. Edit the details.","Price: ৳ — | Valid: set date"]];
+var GAL=[["☕","Coffee preparation"],["🎨","Latte art"],["🧊","Iced coffee"],["🍰","Desserts"],["🪑","Cafe interior"],["🍔","Food photography"],["🫘","Fresh beans"],["🥐","Bakery"]];
+var REVS=[["Sample Customer A",5,"Sample review: a warm place with great coffee."],["Sample Customer B",5,"Sample review: lovely desserts and a calm atmosphere."],["Sample Customer C",4,"Sample review: a nice spot to meet friends."]];
+// ===== RENDER =====
+var $=function(i){return document.getElementById(i)};
+var cats=["All"].concat(MENU.map(function(x){return x[0]}).filter(function(v,i,a){return a.indexOf(v)==i}));
+var tones=["#4a2c18","#3a2a1c","#2e2418","#4a3320","#352015"];
+$("filters").innerHTML=cats.map(function(c,i){return '<button class="'+(i?'':'a')+'" data-c="'+c+'">'+c+'</button>'}).join("");
+function show(c){$("grid").innerHTML=MENU.filter(function(x){return c=="All"||x[0]==c}).map(function(x,i){return '<div class="card"><div class="thumb" style="background:radial-gradient(circle,'+tones[i%5]+',#1a0f08)"><span>'+x[4]+'</span></div><div class="cb"><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="row"><span class="price">৳'+x[3]+' <small style="font-size:.7rem;color:#b9a58b">sample</small></span><a class="btn small" href="mailto:'+EMAIL+'?subject='+encodeURIComponent('Order: '+x[1])+'&body='+encodeURIComponent('I would like to order: '+x[1]+'\nName:\nPhone:')+'">Order Now</a></div></div></div>'}).join("")}
+show("All");
+$("filters").onclick=function(e){var b=e.target.closest("button");if(!b)return;[].forEach.call(this.children,function(x){x.classList.remove("a")});b.classList.add("a");show(b.dataset.c)};
+$("offers").innerHTML=OFFERS.map(function(o){return '<div class="offer"><div class="e">'+o[0]+'</div><h3>'+o[1]+'</h3><p>'+o[2]+'</p><div class="meta">'+o[3]+'</div></div>'}).join("");
+$("gal").innerHTML=GAL.map(function(g,i){return '<button data-i="'+i+'" data-t="'+g[1]+'" aria-label="'+g[1]+'" style="background:linear-gradient(135deg,'+tones[i%5]+',#1a0f08)"><span>'+g[0]+'</span></button>'}).join("");
+$("gal").onclick=function(e){var b=e.target.closest("button");if(!b)return;var g=GAL[b.dataset.i];$("lbe").textContent=g[0];$("lbt").textContent=g[1];$("lb").classList.add("o")};
+$("lb").onclick=function(){this.classList.remove("o")};document.onkeydown=function(e){if(e.key=="Escape")$("lb").classList.remove("o")};
+$("revs").innerHTML=REVS.map(function(r){return '<div class="rev"><div class="stars" aria-label="'+r[1]+' stars">'+"★".repeat(r[1])+"☆".repeat(5-r[1])+'</div><p>'+r[2]+'</p><div class="who"><div class="av">'+r[0].slice(-1)+'</div><div>'+r[0]+'</div></div></div>'}).join("");
+$("f").onsubmit=function(e){e.preventDefault();location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Message from "+$("n").value)+"&body="+encodeURIComponent($("m").value+"\n\nReply to: "+$("e").value)};
+// nav
+var nav=$("nav"),L=$("links"),B=$("burger");
+B.onclick=function(){var o=L.classList.toggle("o");B.setAttribute("aria-expanded",o);B.textContent=o?"✕":"☰"};
+L.onclick=function(e){if(e.target.tagName=="A"){L.classList.remove("o");B.textContent="☰"}};
+addEventListener("scroll",function(){nav.classList.toggle("s",scrollY>40);$("cup").style.setProperty("--py",(scrollY*.12)+"px")},{passive:true});
+// reveal
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("v");io.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll(".rv").forEach(function(x){io.observe(x)});
+// background: beans, particles, liquid waves, glow
+(function(){var c=$("bg"),x=c.getContext("2d"),W,H,P=[],t=0,red=matchMedia("(prefers-reduced-motion:reduce)").matches;
+function rs(){var d=Math.min(devicePixelRatio||1,1.5);W=c.width=innerWidth*d;H=c.height=innerHeight*d;x.setTransform(d,0,0,d,0,0);W=innerWidth;H=innerHeight}
+rs();addEventListener("resize",rs);
+var N=innerWidth<700?16:30;
+for(var i=0;i<N;i++)P.push({x:Math.random()*2e3,y:Math.random()*1200,s:6+Math.random()*10,v:.15+Math.random()*.35,r:Math.random()*6,a:Math.random()*.01,k:i%3?0:1});
+function bean(p){x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle="rgba(90,53,32,.55)";x.beginPath();x.ellipse(0,0,p.s,p.s*.65,0,0,7);x.fill();x.strokeStyle="rgba(240,200,120,.35)";x.lineWidth=1.2;x.beginPath();x.moveTo(-p.s*.8,0);x.quadraticCurveTo(0,p.s*.3,p.s*.8,0);x.stroke();x.restore()}
+function f(){t+=.012;x.clearRect(0,0,W,H);
+var g=x.createRadialGradient(W*.75,H*.3+Math.sin(t)*30,0,W*.75,H*.3,W*.5);g.addColorStop(0,"rgba(212,162,76,.14)");g.addColorStop(1,"rgba(212,162,76,0)");x.fillStyle=g;x.fillRect(0,0,W,H);
+for(var k=0;k<2;k++){x.fillStyle=k?"rgba(90,53,32,.18)":"rgba(212,162,76,.07)";x.beginPath();x.moveTo(0,H);for(var i=0;i<=W;i+=24)x.lineTo(i,H*(.88-k*.04)+Math.sin(i*.008+t*(1+k*.5))*18);x.lineTo(W,H);x.fill()}
+P.forEach(function(p){p.y-=p.v;p.r+=p.a;p.x+=Math.sin(t+p.s)*.3;if(p.y<-20){p.y=H+20;p.x=Math.random()*W}
+if(p.k)bean(p);else{x.fillStyle="rgba(240,200,120,.35)";x.beginPath();x.arc(p.x,p.y,p.s*.18,0,7);x.fill()}});
+if(!red)requestAnimationFrame(f)}
+f()})();
+</script></body></html>
